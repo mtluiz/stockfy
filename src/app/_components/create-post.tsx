@@ -1,18 +1,25 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 import { api } from "@/trpc/react";
 
-export function CreatePost() {
-  const router = useRouter();
-  const [name, setName] = useState("");
+interface IProduct {
+  name: string;
+  brand: string;
+  observation: string;
+  image: string;
+}
 
-  const createPost = api.post.create.useMutation({
+export function CreateProduct() {
+  const router = useRouter();
+  const [data, setData] = useState({});
+
+  const createProduct = api.product.create.useMutation({
     onSuccess: () => {
       router.refresh();
-      setName("");
+      setData({});
     },
   });
 
@@ -20,23 +27,48 @@ export function CreatePost() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createPost.mutate({ name });
+        createProduct.mutate(data);
       }}
       className="flex flex-col gap-2"
     >
       <input
         type="text"
-        placeholder="Title"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        placeholder="Nome"
+        value={data.name}
+        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
         className="w-full rounded-full px-4 py-2 text-black"
       />
+
+      <input
+        type="text"
+        placeholder="Nome"
+        value={data.brand}
+        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
+        className="w-full rounded-full px-4 py-2 text-black"
+      />
+
+      <input
+        type="text"
+        placeholder="Nome"
+        value={data.observation}
+        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
+        className="w-full rounded-full px-4 py-2 text-black"
+      />
+
+      <input
+        type="text"
+        placeholder="Nome"
+        value={data.image}
+        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
+        className="w-full rounded-full px-4 py-2 text-black"
+      />
+
       <button
         type="submit"
         className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createPost.isLoading}
+        disabled={createProduct.isLoading}
       >
-        {createPost.isLoading ? "Submitting..." : "Submit"}
+        {createProduct.isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
