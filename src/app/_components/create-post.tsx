@@ -14,12 +14,22 @@ interface IProduct {
 
 export function CreateProduct() {
   const router = useRouter();
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    name: "",
+    brand: "",
+    observation: "",
+    image: "",
+  });
 
   const createProduct = api.product.create.useMutation({
     onSuccess: () => {
       router.refresh();
-      setData({});
+      setData({
+        name: "",
+        brand: "",
+        observation: "",
+        image: "",
+      });
     },
   });
 

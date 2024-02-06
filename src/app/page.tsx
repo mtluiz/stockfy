@@ -2,13 +2,11 @@
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { Inter as FontSans } from "next/font/google";
-import { CreateProduct } from "@/app/_components/create-post";
 import { getServerAuthSession } from "@/server/auth";
-import { api } from "@/trpc/server";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button"
 
-export const fontSans = FontSans({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
