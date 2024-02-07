@@ -45,6 +45,13 @@ export const productRouter = createTRPCRouter({
       where: { createdBy: { id: ctx.session.user.id } },
     });
   }),
+  getAll: protectedProcedure.query(({ ctx }) => {
+    return ctx.db.product.findMany()
+  }),
+
+  deleteOne: protectedProcedure.input(z.object({id: z.number()})).query(({ ctx, input }) => {
+    return ctx.db.product.delete({where: {id: input.id}})
+  }),
 
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";

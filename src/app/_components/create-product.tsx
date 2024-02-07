@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useReducer, useState } from "react";
 
 import { api } from "@/trpc/react";
+import { Button } from "@/components/ui/button";
 
 interface IProduct {
   name: string;
@@ -43,43 +44,42 @@ export function CreateProduct() {
     >
       <input
         type="text"
-        placeholder="Nome"
+        placeholder="Nome do produto"
         value={data.name}
         onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
-        className="w-full rounded-full px-4 py-2 text-black"
+        className="w-[400px] rounded px-4 py-2 text-black bg-blue-100"
       />
 
       <input
         type="text"
-        placeholder="Nome"
+        placeholder="Marca do produto"
         value={data.brand}
-        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
-        className="w-full rounded-full px-4 py-2 text-black"
+        onChange={(e) => setData((val) => ({ ...val, brand: e.target.value }))}
+        className="w-[400px] rounded px-4 py-2 text-black bg-blue-100"
       />
 
       <input
         type="text"
-        placeholder="Nome"
-        value={data.observation}
-        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
-        className="w-full rounded-full px-4 py-2 text-black"
-      />
-
-      <input
-        type="text"
-        placeholder="Nome"
+        placeholder="Imagem"
         value={data.image}
-        onChange={(e) => setData((val) => ({ ...val, name: e.target.value }))}
-        className="w-full rounded-full px-4 py-2 text-black"
+        onChange={(e) => setData((val) => ({ ...val, image: e.target.value }))}
+        className="w-[400px] rounded px-4 py-2 text-black bg-blue-100"
       />
 
-      <button
+      <textarea
+        placeholder="Observação"
+        value={data.observation}
+        onChange={(e) => setData((val) => ({ ...val, observation: e.target.value }))}
+        className="w-[400px] rounded px-4 py-2 text-black bg-blue-100"
+      ></textarea>
+
+      <Button
         type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
+        className="px-10 py-3 font-semibold transition hover:bg-white/20 w-28"
         disabled={createProduct.isLoading}
       >
-        {createProduct.isLoading ? "Submitting..." : "Submit"}
-      </button>
+        {createProduct.isLoading ? "Criando..." : "Criar Produto"}
+      </Button>
     </form>
   );
 }
