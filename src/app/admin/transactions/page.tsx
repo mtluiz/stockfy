@@ -43,7 +43,7 @@ async function Transactions() {
 
       <div className="mt-4 rounded border-b-4 border-t-4 border-blue-400 p-4">
         <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white">
-          Criar Transações
+          Criar transação
         </h1>
         <CreateTransaction products={products} />
       </div>
