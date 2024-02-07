@@ -2,9 +2,9 @@
 [x] - Criar rota transacoes
 [x] - Criar Pagina transacoes entrada e saida
 [x] - Apagar transacions
-[ ] - Pegar quantidade de produtos pelas entradas e saidas
+[x] - Pegar quantidade de produtos pelas entradas e saidas
 [ ] - Combobox na pesquisa de Item
-[ ] - Data Table na porra toda
+[x] - Data Table na porra toda
 [ ] - Tamanho imaagem
 
 Opcional

@@ -41,7 +41,7 @@ async function Transactions() {
         </ul>
       </header>
 
-      <div className="mt-4 rounded border-b-4 border-t-4 border-blue-400 p-4">
+      <div className="mt-4 rounded border-b-4 border-t-4 border-blue-400 p-4 bg-gray-100">
         <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl dark:text-white">
           Criar transação
         </h1>
