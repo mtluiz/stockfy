@@ -24,13 +24,13 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
 
   const createTransaction = api.productTransaction.create.useMutation({
     onSuccess: () => {
-      router.refresh();
       setData({
         date: new Date(),
         quantity: 1,
         type: "",
         productId: "",
       });
+      router.refresh();
     },
   });
 
@@ -39,7 +39,6 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
       onSubmit={(e) => {
         e.preventDefault();
         createTransaction.mutate({...data, productId: +data.productId});
-        (e.target as HTMLFormElement).reset()
       }}
       className="flex flex-col gap-2"
     >
@@ -73,7 +72,7 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
         className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
         required
       >
-        <option value={""} disabled selected>Selecione o Produto</option>
+        <option value={""} disabled>Selecione o Produto</option>
         {products.map((product) => (
           <option key={product.id} value={product.id}>{product.name}</option>
         ))}
@@ -81,7 +80,6 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
 
       <select
         value={data.type}
-        defaultValue={"none"}
         onChange={(e) => setData((val) => ({ ...val, type: e.target.value }))}
         className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
         required

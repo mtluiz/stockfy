@@ -43,7 +43,12 @@ export const productRouter = createTRPCRouter({
     });
   }),
   getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.product.findMany()
+
+    return ctx.db.product.findMany({
+      include: {
+        ProductTransaction: true
+      }
+    })
   }),
 
   deleteOne: protectedProcedure.input(z.object({id: z.number()})).mutation(({ ctx, input }) => {
