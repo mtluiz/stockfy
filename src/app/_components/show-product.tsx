@@ -9,7 +9,8 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import React from "react";
-import { AppRouter } from "@/server/api/root";
+import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
 
 interface IProduct {
   id: number;
@@ -24,9 +25,17 @@ export default function ShowProducts({
 }: {
   latestProduct: IProduct[];
 }) {
+  const router = useRouter();
+  const deleteApi = api.product.deleteOne.useMutation({
+    onSuccess: () => {
+      router.refresh()
+      console.log("A DALVA BEBE PORRA");
+      
+    }
+  })
   function deleteProduct(id: number) {
     if (confirm("Você realmente deseja apagar este item?")) {
-        //api.product.deleteOne({id})
+      deleteApi.mutate({id})
     }
   }
 

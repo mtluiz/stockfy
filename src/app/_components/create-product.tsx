@@ -1,17 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useReducer, useState } from "react";
-
+import { useState } from "react";
 import { api } from "@/trpc/react";
 import { Button } from "@/components/ui/button";
-
-interface IProduct {
-  name: string;
-  brand: string;
-  observation: string;
-  image: string;
-}
 
 export function CreateProduct() {
   const router = useRouter();

@@ -25,9 +25,6 @@ export const productRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       return ctx.db.product.create({
         data: {
           name: input.name,
@@ -49,7 +46,7 @@ export const productRouter = createTRPCRouter({
     return ctx.db.product.findMany()
   }),
 
-  deleteOne: protectedProcedure.input(z.object({id: z.number()})).query(({ ctx, input }) => {
+  deleteOne: protectedProcedure.input(z.object({id: z.number()})).mutation(({ ctx, input }) => {
     return ctx.db.product.delete({where: {id: input.id}})
   }),
 
