@@ -1,14 +1,14 @@
 "use client";
 
 import {
-  ColumnDef,
+  type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
-  SortingState,
+  type SortingState,
   getSortedRowModel,
-  ColumnFiltersState,
+  type ColumnFiltersState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
@@ -20,8 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { set } from "zod";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +35,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [getSearchString, setGetSearchString] = useState<string>("");
 
   const table = useReactTable({
     data,
@@ -50,27 +52,39 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  useEffect(() => {
+    if (getSearchString) {
+      table.setColumnFilters((old) => [
+        ...old,
+        {
+          id: "name",
+          value: getSearchString,
+        },
+      ]);
+    } else {
+      table.setColumnFilters((old) =>
+        old.filter((filter) => filter.id !== "name"),
+      );
+    }
+  }, [getSearchString, table]);
+
   return (
     <div className="my-4">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filtrar por nome de produto..."
-          value={
-            (table.getColumn("productName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("productName")?.setFilterValue(event.target.value)
-          }
+          value={getSearchString}
+          onChange={(event) => setGetSearchString(event.target.value)}
           className="max-w-sm"
         />
-        <Input
+        {/* <Input
           placeholder="Filtrar por data..."
           value={(table.getColumn("date")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("date")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
       </div>
       <div className="rounded-md border">
         <Table>

@@ -16,7 +16,7 @@ async function CrudShowcase() {
     <div className="border-box min-h-[100vh] w-full bg-[#ffffff] p-6 antialiased">
       <header className="border-box flex items-center rounded-xl bg-[#0f084b] p-6">
         <Link href="/">
-        <h1>Marlon Vinnick</h1>
+        <h1 className="color-white">Marlon Vinnick</h1>
         </Link>
 
         <ul className="ml-12 flex gap-4">
