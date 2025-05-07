@@ -22,6 +22,9 @@ export const productRouter = createTRPCRouter({
         brand: z.string().min(1),
         observation: z.string().min(1),
         image: z.string().min(1),
+        sector: z.string().min(1),
+        shelf: z.string().min(1),
+        shed: z.string().min(1),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -31,6 +34,9 @@ export const productRouter = createTRPCRouter({
           brand: input.brand,
           observation: input.observation,
           image: input.image,
+          sector: input.sector,
+          shelf: input.shelf,
+          shed: input.shed,
           createdBy: { connect: { id: ctx.session.user.id } },
         },
       });

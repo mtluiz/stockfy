@@ -17,6 +17,9 @@ export function CreateProduct() {
     brand: "",
     observation: "",
     image: "",
+    sector: "",
+    shelf: "",
+    shed: ""
   });
 
   const createProduct = api.product.create.useMutation({
@@ -27,6 +30,9 @@ export function CreateProduct() {
         brand: "",
         observation: "",
         image: "",
+        sector: "",
+        shelf: "",
+        shed: ""
       });
     },
   });
@@ -98,6 +104,30 @@ export function CreateProduct() {
         placeholder="Marca do produto"
         value={data.brand}
         onChange={(e) => setData((val) => ({ ...val, brand: e.target.value }))}
+        className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
+      />
+
+      <input
+        type="text"
+        placeholder="Setor"
+        value={data.sector}
+        onChange={(e) => setData((val) => ({ ...val, sector: e.target.value }))}
+        className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
+      />
+
+      <input
+        type="text"
+        placeholder="Prateleira"
+        value={data.shelf}
+        onChange={(e) => setData((val) => ({ ...val, shelf: e.target.value }))}
+        className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
+      />
+
+      <input
+        type="text"
+        placeholder="Galpão"
+        value={data.shed}
+        onChange={(e) => setData((val) => ({ ...val, shed: e.target.value }))}
         className="w-[400px] rounded bg-blue-100 px-4 py-2 text-black"
       />
 

@@ -22,6 +22,8 @@ export const transactionRouter = createTRPCRouter({
         quantity: z.number(),
         type: z.string().min(1),
         productId: z.number(),
+        origin: z.string(),
+        orderNumber: z.string()
       }),
     )
     .mutation(async ({ ctx, input }) => {

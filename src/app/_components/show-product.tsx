@@ -38,6 +38,19 @@ interface IProductTable {
   actions: VoidFunction;
 }
 
+function amplifyImage(url: string) {
+  const div = document.createElement("div")
+  const image = document.createElement("img")
+  image.src = url
+  div.classList.add("image-modal")
+  div.onclick = (e: MouseEvent) => {
+    div.remove()
+  }
+  div.appendChild(image)
+  document.body.appendChild(div)
+
+}
+
 export const columns: ColumnDef<IProductTable>[] = [
   {
     accessorKey: "id",
@@ -102,6 +115,7 @@ export const columns: ColumnDef<IProductTable>[] = [
             src={row.original.image}
             width={100}
             height={60}
+            onClick={()=> amplifyImage(row.original.image)}
             className="h-[80px] object-cover"
             alt=""
           />

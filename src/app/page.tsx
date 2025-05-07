@@ -23,7 +23,7 @@ export default async function Home() {
       )}
     >
       <div className="flex flex-col items-center gap-2">
-        <img src="/logo.jpg" alt="" width={300} className="rounded-xl" />
+        <img src="/logo2.jpeg" alt="" width={300} className="rounded-xl" />
         <div className="flex flex-col items-center justify-center gap-4">
           <p className="text-center text-2xl text-white">
             {session && <span>Conectado como <strong className="text-[30px]">{session.user?.name}</strong></span>}
