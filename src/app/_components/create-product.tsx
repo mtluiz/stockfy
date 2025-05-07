@@ -85,7 +85,7 @@ export function CreateProduct() {
             return
           }
         } else {
-          data.image = ""
+          data.image = " "
           createProduct.mutate(data);
         }
         setUploading(false);
