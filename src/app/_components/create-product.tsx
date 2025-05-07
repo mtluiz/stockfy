@@ -42,51 +42,52 @@ export function CreateProduct() {
       onSubmit={async (e) => {
         e.preventDefault();
 
-        if (!file) {
-          alert("Please select a file to upload.");
-          return;
-        }
+        if (file) {
+          setUploading(true);
 
-        setUploading(true);
-
-        const response = await fetch("/api/upload",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const response = await fetch("/api/upload",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                filename: file.name,
+                contentType: file.type,
+              }),
             },
-            body: JSON.stringify({
-              filename: file.name,
-              contentType: file.type,
-            }),
-          },
-        );
+          );
 
-        if (response.ok) {
-          const { url, fields } = await response.json();
+          if (response.ok) {
+            const { url, fields } = await response.json();
 
-          const formData = new FormData();
-          Object.entries(fields).forEach(([key, value]) => {
-            formData.append(key, value as string);
-          });
-          formData.append("file", file);
+            const formData = new FormData();
+            Object.entries(fields).forEach(([key, value]) => {
+              formData.append(key, value as string);
+            });
+            formData.append("file", file);
 
-          const uploadResponse = await fetch(url, {
-            method: "POST",
-            body: formData,
-          });
+            const uploadResponse = await fetch(url, {
+              method: "POST",
+              body: formData,
+            });
 
-          if (uploadResponse.ok) {
-            data.image = "https://stockfy.s3.sa-east-1.amazonaws.com/" + fields.key
-            createProduct.mutate(data);
+            if (uploadResponse.ok) {
+              data.image = "https://stockfy.s3.sa-east-1.amazonaws.com/" + fields.key
+              createProduct.mutate(data);
+            } else {
+              console.error("S3 Upload Error:", uploadResponse);
+              alert("Falha ao criar produto!");
+            }
+            return
           } else {
-            console.error("S3 Upload Error:", uploadResponse);
-            alert("Falha ao criar produto!");
+            alert("Failed to get pre-signed URL.");
+            return
           }
         } else {
-          alert("Failed to get pre-signed URL.");
+          data.image = ""
+          createProduct.mutate(data);
         }
-
         setUploading(false);
       }}
       className="flex flex-col gap-2"
