@@ -20,6 +20,8 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
     quantity: 1,
     type: "",
     productId: "",
+    origin: "",
+    orderNumber: "",
   });
 
   const createTransaction = api.productTransaction.create.useMutation({
@@ -29,6 +31,8 @@ export function CreateTransaction({ products }: { products: IProduct[] }) {
         quantity: 1,
         type: "",
         productId: "",
+        origin: "",
+        orderNumber: "",
       });
       router.refresh();
     },
