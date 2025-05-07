@@ -20,7 +20,7 @@ export const productRouter = createTRPCRouter({
       z.object({
         name: z.string().min(1),
         brand: z.string().min(1),
-        observation: z.string().min(1),
+        observation: z.string().optional(),
         image: z.string().min(1),
         sector: z.string().min(1),
         shelf: z.string().min(1),
@@ -32,7 +32,8 @@ export const productRouter = createTRPCRouter({
         data: {
           name: input.name,
           brand: input.brand,
-          observation: input.observation,
+          observation: input.observation ?? "",
+          // image: input.image,
           image: input.image,
           sector: input.sector,
           shelf: input.shelf,

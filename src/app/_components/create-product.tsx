@@ -74,6 +74,7 @@ export function CreateProduct() {
 
             if (uploadResponse.ok) {
               data.image = "https://stockfy.s3.sa-east-1.amazonaws.com/" + fields.key
+              data.observation = data.observation || " ";
               createProduct.mutate(data);
             } else {
               console.error("S3 Upload Error:", uploadResponse);
@@ -85,6 +86,7 @@ export function CreateProduct() {
             return
           }
         } else {
+          data.observation = data.observation || " ";
           data.image = " "
           createProduct.mutate(data);
         }
